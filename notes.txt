@@ -1,0 +1,40 @@
+## Objects
+==========
+Node = {
+    'node_id'            : _val_,
+    'num_ports'.         : _val_,
+    'queue_arrival_rate' : [<input_port>][<output_port>],   # λ_(i→j)
+    'queue_service_rate' : [<input_port>][<output_port>],   # μ_(i→j)
+    'queue_occupancy'    : [<input_port>][<output_port>],   # q_(i→j) 
+    <port_id> : {
+        'agg_input_arrival_rate'  : _val_,   # λ_i
+        'agg_input_service_rate'  : _val_,   # μ_i
+        'agg_output_arrival_rate' : _val_,   # λ_j
+        'agg_output_service_rate' : _val_,   # μ_i
+
+        'queue_capacity'          : _val_,   # Q_i
+
+        <output_port_id>          : { 'flow_ids': [...]},      # list of flows this path through the router
+        }
+    }
+
+Routing Table = {
+    'current_node_id' : {
+        'destination_node_id : <output_port>,
+        }
+    }
+
+Flow Table = {
+    <flow_id> : {
+        'rate' : _val_,
+
+
+
+
+# Usage examples
+================
+> Sets the arrival rate for traffic entering input port i=1 and leaving output port j=2
+Node['queue_arrival_rate'][1][2] = 10
+
+> Sets the aggregate arrival rate of traffic leaving output port j=2
+Node[2]['agg_output_arrival_rate'] = 30
